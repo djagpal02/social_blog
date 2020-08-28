@@ -19,8 +19,8 @@
             <h5 class="title">All Groups</h5>
             <ul class='list-unstyled'>
                 {% for other_group in get_other_groups %}
-                <li class="group li-with-bullet"><a href="{% ur 'groups:single' slug=other_group.slug %}"></a></li>
-                {% endblock %}
+                <li class="group li-with-bullet"><a href="{% url 'groups:single' slug=other_group.slug %}"></a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

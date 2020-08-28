@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.urls import reverse
+from django.urls import reverse
 from django.conf import settings
 
 # Create your models here.
@@ -10,11 +10,11 @@ User = get_user_model()
 
 
 class Post(models.Model):
-    user = models.ForeignKey(user, related_name='posts')
+    user = models.ForeignKey(User, related_name='posts', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     message = models.TextField()
-    message_html = models.textField(editable=False)
-    group = models.ForeignKey(Group, related_name='posts', null=True, blank=True)
+    message_html = models.TextField(editable=False)
+    group = models.ForeignKey(Group, related_name='posts', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.message
@@ -28,4 +28,4 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        unique_togther = ['user','message'] 
+        unique_together = ['user','message'] 
